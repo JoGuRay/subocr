@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "subocr"
+version = "0.1.0"
+description = "Local OCR for video frames on macOS, powered by Apple Vision."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "JoGuRay" }]
+keywords = ["ocr", "video", "subtitles", "macos", "vision", "ffmpeg"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: MacOS X",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: MacOS",
+  "Programming Language :: Python :: 3",
+  "Topic :: Multimedia :: Video",
+  "Topic :: Text Processing",
+]
+
+[project.urls]
+Homepage = "https://github.com/JoGuRay/subocr"
+Issues = "https://github.com/JoGuRay/subocr/issues"
+
+[project.scripts]
+subocr = "subocr.cli:main"
+
+[tool.setuptools]
+packages = ["subocr"]
+
+[tool.setuptools.package-data]
+subocr = ["native/*.m"]
