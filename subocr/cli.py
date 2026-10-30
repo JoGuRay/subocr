@@ -425,6 +425,9 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         video = args.video.expanduser().resolve()
         if not video.is_file():
             raise ToolError("input is not a file: %s" % video)
+        for tool in ("ffmpeg", "ffprobe"):
+            if shutil.which(tool) is None:
+                raise ToolError("%s not found; install FFmpeg first (brew install ffmpeg)" % tool)
         if args.interval <= 0:
             raise ToolError("--interval must be greater than 0")
         if args.start < 0:
@@ -538,6 +541,9 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             print("  files    %s" % ", ".join(files))
         return 0
     except ToolError as error:
+        print("subocr: error: %s" % error, file=sys.stderr)
+        return 2
+    except OSError as error:
         print("subocr: error: %s" % error, file=sys.stderr)
         return 2
     except KeyboardInterrupt:
